@@ -30,3 +30,4 @@ RUN export http_proxy="http://172.17.42.1:8080/" \
 
 ENV LANG   en_US.UTF-8
 ENV LC_ALL en_US.UTF-8
+ENV TZ     Asia/Shanghai
