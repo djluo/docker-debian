@@ -10,7 +10,7 @@ ADD ./sources.list /etc/apt/
 RUN export http_proxy="http://172.17.42.1:8080/" \
     && export DEBIAN_FRONTEND=noninteractive     \
     && apt-get update \
-    && apt-get install -y locales procps telnet curl  \
+    && apt-get install -y locales procps telnet curl cron \
     && localedef -c -i zh_CN -f UTF-8 zh_CN.UTF-8 \
     && localedef -c -i en_US -f UTF-8 en_US.UTF-8 \
     && export LANG="en_US.UTF-8"   \
@@ -21,6 +21,7 @@ RUN export http_proxy="http://172.17.42.1:8080/" \
     && rm -rf usr/share/man    \
     && rm -rf usr/share/doc    \
     && rm -rf usr/share/info   \
+    && chmod -x /etc/cron.daily/* \
     && echo "alias grep='grep --color'" >  /etc/profile.d/alias.sh \
     && echo "alias l.='ls -d .*'"       >> /etc/profile.d/alias.sh \
     && echo "alias ll='ls -l'"          >> /etc/profile.d/alias.sh \
