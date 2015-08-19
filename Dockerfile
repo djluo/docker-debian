@@ -10,7 +10,8 @@ ADD ./sources.list /etc/apt/
 RUN export http_proxy="http://172.17.42.1:8080/" \
     && export DEBIAN_FRONTEND=noninteractive     \
     && apt-get update \
-    && apt-get install -y locales procps telnet curl cron rsync \
+    && apt-get install -y locales procps telnet curl cron rsync perl \
+    && apt-get purge -y exim4 exim4-base exim4-config heirloom-mailx libpcre3 \
     && localedef -c -i zh_CN -f UTF-8 zh_CN.UTF-8 \
     && localedef -c -i en_US -f UTF-8 en_US.UTF-8 \
     && apt-get clean \
