@@ -10,11 +10,9 @@ ADD ./sources.list /etc/apt/
 RUN export http_proxy="http://172.17.42.1:8080/" \
     && export DEBIAN_FRONTEND=noninteractive     \
     && apt-get update \
-    && apt-get install -y locales procps telnet curl cron \
+    && apt-get install -y locales procps telnet curl cron rsync \
     && localedef -c -i zh_CN -f UTF-8 zh_CN.UTF-8 \
     && localedef -c -i en_US -f UTF-8 en_US.UTF-8 \
-    && export LANG="en_US.UTF-8"   \
-    && export LC_ALL="en_US.UTF-8" \
     && apt-get clean \
     && unset http_proxy DEBIAN_FRONTEND \
     && rm -rf usr/share/locale \
