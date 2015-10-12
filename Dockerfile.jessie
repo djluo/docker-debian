@@ -1,0 +1,45 @@
+# vim:set et ts=2 sw=2 syntax=dockerfile:
+# jessie 8
+
+FROM       debian:8
+MAINTAINER djluo <dj.luo@baoyugame.com>
+
+ADD ./jessie.list /etc/apt/sources.list
+
+RUN export http_proxy="http://172.17.42.1:8080/" \
+    && export DEBIAN_FRONTEND=noninteractive     \
+    && apt-get update \
+    && apt-get install -y locales procps telnet curl cron rsync perl \
+    && apt-get purge -y exim4 exim4-base exim4-config \
+    && apt-get autoremove -y \
+    && localedef -c -i zh_CN -f UTF-8 zh_CN.UTF-8 \
+    && localedef -c -i en_US -f UTF-8 en_US.UTF-8 \
+    && apt-get clean \
+    && unset http_proxy DEBIAN_FRONTEND \
+    && rm -rf usr/share/locale \
+    && rm -rf usr/share/man    \
+    && rm -rf usr/share/doc    \
+    && rm -rf usr/share/info   \
+    && chmod -x /etc/cron.daily/* \
+    && cd /usr/share/i18n/           \
+    && mkdir localesnew charmapsnew  \
+    && cd /usr/share/i18n/locales    \
+    && mv es_US i18n zh_CN C ../localesnew/ \
+    && cd /usr/share/i18n/ \
+    && rm -rf locales      \
+    && mv localesnew locales  \
+    && cd /usr/share/i18n/charmaps \
+    && mv UTF-8.gz ../charmapsnew/ \
+    && cd /usr/share/i18n/     \
+    && rm -rf charmaps         \
+    && mv charmapsnew charmaps \
+    && find /var/lib/apt -type f -exec rm -fv {} \; \
+    && echo "alias grep='grep --color'" >  /etc/profile.d/alias.sh \
+    && echo "alias l.='ls -d .*'"       >> /etc/profile.d/alias.sh \
+    && echo "alias ll='ls -l'"          >> /etc/profile.d/alias.sh \
+    && echo "alias ls='ls --color'"     >> /etc/profile.d/alias.sh \
+    && echo "alias lt='ls -l --time-style=long-iso'" >> /etc/profile.d/alias.sh
+
+ENV LANG   en_US.UTF-8
+ENV LC_ALL en_US.UTF-8
+ENV TZ     Asia/Shanghai
