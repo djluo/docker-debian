@@ -1,4 +1,9 @@
-deb http://mirrors.163.com/debian/          jessie           main contrib
-deb http://mirrors.163.com/debian/          jessie-updates   main contrib
-deb http://mirrors.163.com/debian/          jessie-backports main contrib
-deb http://mirrors.163.com/debian-security/ jessie/updates   main contrib
+deb http://ftp.cn.debian.org/debian/          jessie           main contrib
+deb http://ftp.cn.debian.org/debian/          jessie-updates   main contrib
+deb http://ftp.cn.debian.org/debian/          jessie-backports main contrib
+deb http://ftp.cn.debian.org/debian-security/ jessie/updates   main contrib
+
+#deb http://mirrors.163.com/debian/          jessie           main contrib
+#deb http://mirrors.163.com/debian/          jessie-updates   main contrib
+#deb http://mirrors.163.com/debian/          jessie-backports main contrib
+#deb http://mirrors.163.com/debian-security/ jessie/updates   main contrib
